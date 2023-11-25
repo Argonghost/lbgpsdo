@@ -27,7 +27,7 @@ the file `99-lbgpsdo.rules` under `/etc/udev/rules.d` will ensure that your
 systems `usb` group has access to the device. Additionally, in case PyHDI
 fails to open device when running ./lbgpsdo.py, its probably due to permission issues,
 therefore make sure to chmod +x and use sudo.  If sudo still doesn't work.  Create an extra dummy file
-in `etc/etc/udev/rules.d` like dummy_99.rules, and paste:  
+in `etc/udev/rules.d` like dummy_99.rules, and paste:  
 `SUBSYSTEMS=="usb", ATTRS{idVendor}=="1dd2", ATTRS{idProduct}=="2211", MODE:="0666"`
 and then: 
 `sudo udevadm control --reload-rules`
