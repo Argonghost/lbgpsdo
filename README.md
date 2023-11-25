@@ -7,7 +7,7 @@ configuration of the Leo Bodnar GPSDO device.
 Installation
 ------------
 
-You ne the python `hid` package. See https://github.com/apmorton/pyhidapi for
+You need the python `hid` package. See https://github.com/apmorton/pyhidapi for
 more information.
 
 If the package is not provided by your linux distribution you can create an
@@ -24,7 +24,16 @@ Setup
 
 To access the device you need access permission to the device file. Placing
 the file `99-lbgpsdo.rules` under `/etc/udev/rules.d` will ensure that your
-systems `usb` group has access to the device.
+systems `usb` group has access to the device. Additionally, in case PyHDI
+fails to open device when running ./lbgpsdo.py, its probably due to permission issues,
+therefore make sure to chmod +x and use sudo.  If sudo still doesn't work.  Create an extra dummy file
+in `etc/etc/udev/rules.d` like dummy_99.rules, and paste:  
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="1dd2", ATTRS{idProduct}=="2211", MODE:="0666"
+and then: 
+sudo udevadm control --reload-rules
+and then:
+unplug and plug back usb.  And then you can proceed with below steps. 
+
 
 Usage
 -----
